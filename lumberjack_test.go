@@ -33,6 +33,25 @@ func TestLumberjackSinkURI(t *testing.T) {
 			localTime:  false,
 			compress:   false,
 		},
+		// 不主动解码 url 编码的路径
+		{
+			uri:        "lumberjack:logs%2ffoo.log",
+			path:       "logs%2ffoo.log",
+			maxBackups: "",
+			maxSize:    "",
+			maxAge:     "",
+			localTime:  false,
+			compress:   false,
+		},
+		{
+			uri:        "lumberjack:%2fvar%2flog%2ffoo.log",
+			path:       "%2fvar%2flog%2ffoo.log",
+			maxBackups: "",
+			maxSize:    "",
+			maxAge:     "",
+			localTime:  false,
+			compress:   false,
+		},
 		// 测试用例2: 完整配置，指定所有可配置参数。
 		{
 			uri:        "lumberjack:foo.log?max_backups=5&max_size=10&max_age=7&local_time=true&compress=true",
